@@ -1,4 +1,4 @@
-module Vizsga2 where
+module Megoldas where
 
 import Data.List
 import Data.Function
