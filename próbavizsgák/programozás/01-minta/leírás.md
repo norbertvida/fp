@@ -13,17 +13,19 @@ Ha bármilyen kérdés, észrevétel felmerül, azt a felügyelőknek kell jelez
 
 - A megoldásban legalább az egyik (tetszőleges) függvényt **rekurzívan** kell megadni. Azaz a vizsga csak akkor érvényes, ha az egyik feladatot rekurzív függvénnyel adtátok meg és az helyes megoldása a feladatnak. A megoldást akkor is elfogadjuk, ha annak egy segédfüggvénye definiált rekurzívan. A könyvtári függvények (length, sum, stb.) rekurzív definíciója nem fogadható el rekurzív megoldásként.
 
-- A programozási részből **legalább 7** pontot kell szerezni az érvényes vizsgához!
+- A programozási részből **legalább 8** pontot kell szerezni az érvényes vizsgához!
+
+- A feladatokat a kiírásnak megfelelően, az ott megadott típusszignatúrának megfelelően kell megoldani. A típusszignatúra nem változtatható meg. Megváltoztatott típusszignatúra esetén a feladat 0 pontot ér.
 
 A feladatok tetszőleges sorrendben megoldhatóak. A pontozás szabályai a következők:
 
-- Minden teszten átmenő megoldás ér teljes pontszámot.
+- Minden teszten átmenő megoldás érhet teljes pontszámot.
 - Funkcionálisan hibás (valamelyik teszteseten megbukó) megoldás nem ér pontot.
-- Fordítási hibás vagy hiányzó megoldás esetén a **teljes megoldás** 0 pontos.
+- Fordítási hibás megoldás esetén a **teljes vizsga** 0 pontos.
 
 Ha hiányos/hibás részek lennének a feltöltött megoldásban, azok kommentben szerepeljenek.
 
-*Tekintve, hogy a tesztesetek - bár odafigyelés mellett íródnak - nem fedik le minden esetben a függvény teljes működését, ezért határozottan javasolt még külön próbálgatni a megoldásokat beadás előtt vagy megkérdezni a felügyelőket!*
+*Tekintve, hogy a tesztesetek, bár odafigyelés mellett íródnak, nem fedik le minden esetben a függvény teljes működését, **határozottan javasolt még külön próbálgatni a megoldásokat beadás előtt** vagy megkérdezni a felügyelőket!*
 
 A *Visual Studio Code Haskell Syntax Highlighting* bővítmény a csatolt fájlok között megtalálható.
 
