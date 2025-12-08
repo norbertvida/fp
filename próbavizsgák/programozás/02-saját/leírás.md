@@ -1,6 +1,4 @@
-# Próbavizsga #2
-
-## Előzetes tudnivalók
+# Előzetes tudnivalók
 
 Használható segédanyagok:
 
@@ -13,8 +11,7 @@ Ha bármilyen kérdés, észrevétel felmerül, azt a felügyelőknek kell jelez
 
 **FONTOS:**
 
-- A megoldásban legalább az egyik (tetszőleges) függvényt
-**rekurzívan** kell megadni. Azaz a vizsga csak akkor érvényes, ha az egyik feladatot rekurzív függvénnyel adtátok meg és az helyes megoldása a feladatnak. A megoldást akkor is elfogadjuk, ha annak egy segédfüggvénye definiált rekurzívan. A könyvtári függvények (length, sum, stb.) rekurzív definíciója nem fogadható el rekurzív megoldásként.
+- A megoldásban legalább az egyik (tetszőleges) függvényt **rekurzívan** kell megadni. Azaz a vizsga csak akkor érvényes, ha az egyik feladatot rekurzív függvénnyel adtátok meg és az helyes megoldása a feladatnak. A megoldást akkor is elfogadjuk, ha annak egy segédfüggvénye definiált rekurzívan. A könyvtári függvények (length, sum, stb.) rekurzív definíciója nem fogadható el rekurzív megoldásként.
 
 - A programozási részből **legalább 7** pontot kell szerezni az érvényes vizsgához!
 

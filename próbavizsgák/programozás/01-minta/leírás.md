@@ -1,6 +1,4 @@
-# Próbavizsga #1
-
-## Előzetes tudnivalók
+# Előzetes tudnivalók
 
 Használható segédanyagok:
 
