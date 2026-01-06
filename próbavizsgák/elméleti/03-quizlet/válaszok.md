@@ -284,7 +284,12 @@ b) Amire illeszkedik az 1. minta, arra illeszkedik a 2. minta is \
 d) A minták közül legalább egy illeszkedik a(z) `[[],[]]` értékre
 
 *Magyarázat:* \
-TODO...
+Az 1. és 3. minták átírva: `[[a],b]`, azaz egy olyan kételemű listák listája, amiben az első elem egy egyelemű lista. \
+A 2. minta átírva: `[a,b]`, azaz egy kételemű lista. \
+Az *a)* opcióhoz: igaz, lásd feljebb. \
+A *b)* opcióhoz: igaz, lásd feljebb. \
+A *c)* opcióhoz: nem igaz, mert a 3. (és 1.) minta listák listájára illeszkedik, a 2. minta pedig tetszőleges kételemű listára, ellenpéldának pl.: `[1,2]`. \
+A *d)* opcióhoz: igaz, a 2. minta; az 1. és 3. minta azért nem, mert a kettő közül az első lista nem egyelemű.
 
 ### 24. Melyik kifejezés nem lista típusú?
 
@@ -294,7 +299,9 @@ c) `([1,2]:[])` \
 ***d) `([1,2],[])`***
 
 *Magyarázat:* \
-TODO...
+Az *a)* opcióhoz: a külső zárójel redundáns, megegyezik a `[[1,2],[]]` kifejezéssel. \
+A *c)* opcióhoz: átírható `[[1,2]]` alakra. \
+A *d)* opcióhoz: egy rendezett pár, aminek a komponensei listák.
 
 ### 25. Mi az eredménye a következő kifejezésnek: `head [1,2,3] == take 1 [3,2,1]`?
 
@@ -304,7 +311,8 @@ b) `False` \
 d) Futási idejű hiba
 
 *Magyarázat:* \
-TODO...
+A `head :: [a] -> a` eredményül a lista első elemét adja, míg a `take :: Int -> [a] -> [a]` az első `N` elemet veszi, így listát ad vissza, még `N = 1` esetben is. \
+Ezért nem típushelyes a kifejezés.
 
 ### 26. Melyik sor hagyható el a függvényből úgy, hogy működése változatlan maradjon?
 
@@ -320,7 +328,7 @@ c) A harmadik \
 d) Egyik sem
 
 *Magyarázat:* \
-TODO...
+Ha az első sort elhagyjuk, akkor a harmadik sorra fog illeszkedni a paraméterként adott lista.
 
 ### 27. Mi lehet a típusa az alábbi kifejezésnek: `map (filter (\x -> x))`?
 
@@ -330,7 +338,10 @@ c) `[[a]] -> [[a]]` \
 ***d) `[[Bool]] -> [[Bool]]`***
 
 *Magyarázat:* \
-TODO...
+Belülről kifelé indulva tekintsük a felhasznált függvények típusait:
+- a `(\x -> x)` lambdafüggvény típusa `a -> a`;
+- a `filter` függvény típusa `(a -> Bool) -> [a] -> [a]`, így a `filter (\x -> x)` típusa `[Bool] -> [Bool]`, mert a fenti függvénynek `Bool`-t kell képeznie, így `Bool`-t is kell kapnia; ebből következik, hogy az összes `a` típusváltozó `Bool` lesz;
+- a `map` függvény típusa `(a -> b) -> [a] -> [b]`, így a `map (filter (\x -> x))` típusa `[[Bool]] -> [[Bool]]`, mert a fenti függvény `[Bool]`-t kap, ami az `a` típusváltozó lesz, és `[Bool]`-t képez, ami a `b` típusváltozó lesz.
 
 ### 28. Mi lehet a típusa az alábbi függvénynek?
 
@@ -345,7 +356,10 @@ c) `f :: (a,b) -> String` \
 ***d) `f :: ([Char],a) -> [Char]`***
 
 *Magyarázat:* \
-TODO...
+1. Az 1. mintaillesztés elárulja nekünk, hogy egy `(x,xs)` rendezett párt kap paraméterül a függvény;
+2. Az 1. definíció elárjulja nekünk, hogy a rendezett pár 1. komponense egy (tetszőleges) lista, hiszen arra értelmezett az `init` (a lista kezdőszelete, az utolsó elemet kivéve);
+3. A 2. definíció elárulja nekünk, hogy eredményül egy `String`-et, azaz `[Char]`-t kell adnunk, ami azt is jelenti, hogy az `init`-nek is egy `String`-et kell adnia, ami pedig azt jelenti, hogy az 1. komponensnek is egy `String`-nek kell lennie.
+
 
 ### 29. Mi a típusa az alábbi függvénynek?
 
@@ -361,7 +375,10 @@ c) `f :: [a] -> [[a]]` \
 ***d) `f :: [[a]] -> [[a]]`***
 
 *Magyarázat:* \
-TODO...
+Az 1. mintaillesztés szerint: `[a] -> [a]`. \
+A 2. mintaillesztés szerint: `[a] -> [a]`. \
+A 3. mintaillesztés szerint: `[[a]] -> [[a]]`. \
+Ezek legbővebb metszete a `[[a]] -> [[a]]`.
 
 ### 30. Mi az eredménye a következő kifejezésnek: `zip [1..] "almafa"`?
 
@@ -371,7 +388,8 @@ b) Nem áll le, végtelen eredményt ad \
 d) Fordítási hiba
 
 *Magyarázat:* \
-TODO...
+A `zip` addig párosítja az elemeket a két listából, amíg mindkét listában vannak elemek, egyébként leáll. \
+Jelen esetben az eredmény `[(1,'a'),(2,'l'),(3,'m'),(4,'a'),(5,'f'),(6,'a')]`.
 
 ### 31. Mi igaz a `foldl (++) x ls` és `foldr (++) x ls` kifejezésekre?
 
@@ -381,7 +399,9 @@ c) Csak az egyik lehet típushelyes \
 ***d) Típushelyesek, de eredményük vagy futási költségük eltérő lehet***
 
 *Magyarázat:* \
-TODO...
+A `foldl (++) x [a, b, ..., c, d]` eredménye: `(((((x ++ a) ++ b) ++ ...) ++ c) ++ d)`. \
+A `foldr (++) x [a, b, ..., c, d]` eredménye: `(a ++ (b ++ (... ++ (c ++ (d ++ x)))))`. \
+Ebből látszik, hogy a `foldl`-es kifejezés esetén az `x` elemei az eredmény elejére kerülnek, míg a `foldr`-es kifejezés esetén a végére.
 
 ### 32. Melyik kifejezés hoz létre helyes `T` típusú értéket, ha `data T = A Int Bool | B String | C`?
 
@@ -391,7 +411,10 @@ c) `B 3` \
 ***d) `C`***
 
 *Magyarázat:* \
-TODO...
+Az *a)* opcióhoz: a kifejezés nem típushelyes. \
+A *b)* opcióhoz: a kifejezés nem típushelyes (a paraméterek sorrendje *számít*). \
+A *c)* opcióhoz: a kifejezés nem típushelyes. \
+A *d)* opcióhoz: a `C` a `T` típus egy paraméter nélküli konstruktora, így önmagában egy `T` típusú érték.
 
 ### 33. Az alábbi függvények közül melyik ad-hoc polimorf (azaz "esetlegesen" polimorf)?
 
@@ -401,7 +424,9 @@ b) `g :: a -> Maybe a` \
 d) `I :: a -> b -> c -> d -> ((a,b), (c,d))`
 
 *Magyarázat:* \
-TODO...
+Az ad-hoc polimorf függvények ugyan típusparamétereket tartalmaznak, de nem tetszőleges típusokra működnek: valamelyik típusparaméter meg van kötve, hogy melyik típusosztályba kell tartoznia. \
+Az `a)`, `b)` és `d)` opciók függvényei mind parametrikusan polimorf függvények, nincs megkötés az egyik típusparaméterre sem. \
+A `c)` opció függvénye ad-hoc polimorf, hiszen az `a` típusparaméter meg lett kötve, hogy az `Eq` típusosztályba kell tartoznia.
 
 ### 34. Melyik kifejezés típushelyes: `(1 + 2.1) :: Double` vagy `((1 :: Int) + 2.1) :: Double`?
 
@@ -411,7 +436,8 @@ c) Egyik kifejezés se típushelyes. \
 d) Mindkettő.
 
 *Magyarázat:* \
-TODO...
+Az `(1 :: Int)` típusa `Int` (az annotációból adódóan), a `2.1` törtszámliterál típusa `Fractional a => a`. \
+A `(+) :: Num a => a -> a -> a` függvény két ugyanolyan típusú paramétert vár, így az `Int` és `Fractional a => a` típusú kifejezések összeadásához az `Int` típusnak a `Fractional` típusosztályban kellene lennie, itt már nem típushelyes a kifejezésünk (hiszen nem létezik `Fractional Int` instance).
 
 ### 35. Melyik állítás teljesül a `reverse` függvényre?
 
@@ -423,7 +449,13 @@ c) `reverse (a ++ b) == b ++ a` \
 ***d) `head (reverse a) == last a`***
 
 *Magyarázat:* \
-TODO...
+Az *a)* opcióhoz: az `a = [a1, a2, a3]` és a `b = [b1, b2, b3]` listákat tekintve: `reverse a ++ reverse b === reverse [a1, a2, a3] ++ reverse [b1, b2, b3] === [a3, a2, a1] ++ [b3, b2, b1] === [a3, a2, a1, b3, b2, b1]` és `reverse (a ++ b) === reverse ([a1, a2, a3] ++ [b1, b2, b3]) === reverse ([a1, a2, a3, b1, b2, b3]) === [b3, b2, b1, a3, a2, a1]`, amik nem megegyezőek. \
+A *b)* opcióhoz: az `a = a1` elemet és a `b = [b1, b2, b3]` listát tekintve: `reverse (a:b) === reverse (a1:[b1, b2, b3]) === reverse [a1, b1, b2, b3] === [b3, b2, b1, a1]` és `b ++ [a] === [b1, b2, b3] ++ [a1] === [b1, b2, b3, a1]`, amik nem megegyezőek. \
+A *c)* opcióhoz: `a = [a1, a2, a3]` és a `b = [b1, b2, b3]` listákat tekintve: `reverse (a ++ b) === reverse ([a1, a2, a3] ++ [b1, b2, b3]) === reverse [a1, a2, a3, b1, b2, b3] === [b3, b2, b1, a3, a2, a1]` és `b ++ a === [b1, b2, b3] ++ [a1, a2, a3] === [b1, b2, b3, a1, a2, a3]`, amik nem megegyezőek. \
+A *d)* opcióhoz: a fentiekkel ellentétben, ahol elég volt egy ellenpélda, itt vizsgálnunk kell általánosan a megbizonyodáshoz:
+- ha az `a = []` lista üres: a `reverse a` eredménye is üres lista, így a `head` és a `last` is üres listát kap, mindkettő futási idejű hibába ütközik; 
+- ha az `a = [a1, a2, ..., an]` lista véges: a `reverse a` eredménye `[an, ..., a2, a1]`, aminek az első eleme (azaz a `head` eredménye) `an`, hasonlóképp a `last a` eredménye `an`;
+- ha az `a = [a1, a2, a3, ...]` lista végtelen: a `reverse a` és `last a` kifejezések kiértékelése végtelen rekurziót eredményeznek. 
 
 ### 36. Melyik típusosztály?
 
@@ -433,7 +465,7 @@ c) `Integer` \
 ***d) `Num`***
 
 *Magyarázat:* \
-TODO...
+Az `Char`, `Bool`, `Integer` konkrét típusok, míg a `Num` egy típusosztály (a számokat tartalmazó típusok osztálya).
 
 ### 37. Mi az `(\x -> head (snd x))` kifejezés típusa?
 
@@ -443,7 +475,10 @@ c) `(a, (b,c)) -> b` \
 d) `((a,b),c) -> a`
 
 *Magyarázat:* \
-TODO...
+1. Az `snd x` kifejezésből kiderül, hogy az `x` egy `(a, b)` típusú rendezett pár.
+2. A `head (snd x)` kifejezésből kiderül, hogy a második komponens egy `[a]` lista, de a különböző típusparaméterek miatt így az `x` egy `(a, [b])` típusú rendezett pár.
+3. A `(\x -> head (snd x))` lambdafüggvény `x` paraméterének típusa a fentiek alapján kiderült, a függvényeket levezetve pedig az `(a, [b]) -> b` típust kapjuk. 
+
 
 ### 38. Mi a `(\x y -> map y x)` kifejezés típusa?
 
@@ -453,7 +488,7 @@ c) `([a] -> [b]) -> ([b] -> [a])` \
 d) `(a -> b) -> [b] -> [a]`
 
 *Magyarázat:* \
-TODO...
+A lambdafüggvény csak fordítva adja oda a `map :: (a -> b) -> [a] -> [b]` függvénynek a paramétereket, így abból `[a] -> (a -> b) -> [b]` típusú függvény lesz.
 
 ### 39. Legyen `f x = take 1 (drop 1 x)` és `g x = drop 1 (take 2 x)`. Minden bemenetre ugyanazt adja a két függvény?
 
@@ -463,7 +498,10 @@ c) Nem, mert van olyan `x`, amire különböző eredményt adnak.
 d) Nem, minden listára különböző eredményt adnak.
 
 *Magyarázat:* \
-TODO...
+Vizsgáljuk az üres, egyelemű és legalább kételemű (akár végtelen) listákat: \
+- ha `x = []` egy üres lista: `f x === f [] === take 1 (drop 1 []) === take 1 [] === []` és `g x === g [] === drop 1 (take 2 []) === drop 1 [] === []`;
+- ha `x = [x1]` egy egyelemű lista: `f x === f [x1] === take 1 (drop 1 [x1]) === take 1 [] === []` és `g x === g [x1] === drop 1 (take 2 [x1]) === drop 1 [x1] === []`;
+- ha `x = [x1, x2, ...]` egy legalább kételemű lista: `f x === f [x1, x2, ...] === take 1 (drop 1 [x1, x2, ...]) === take 1 [x2, ...] === [x2]` és `g x === g [x1, x2, ...] === drop 1 (take 2 [x1, x2, ...]) === drop 1 [x1, x2] === [x2]`.
 
 ### 40. Melyik minta illeszkedik a `((1,10):(3,8):[])` kifejezésre?
 
