@@ -511,7 +511,10 @@ b) `[(x,y)]` \
 d) `(x:[])`
 
 *Magyarázat:* \
-TODO...
+Az *a)* opcióhoz: a minta listájának második eleme (`(2,9)`) nem illeszkedik a kifejezés második elemére (`(3,8)`), illetve a minta háromelemű listákra illeszkedik, a kifejezés pedig kételemű. \
+A *b)* opcióhoz: a minta pontosan egyelemű listára illeszkedik, a kifejezés kételemű lista. \
+A *c)* opcióhoz: az `x` illeszkedik a `10`-re, az első `_` illeszkedik a `8`-ra és a második `_` illeszkedik a `[]` listára. \
+A *d)* opcióhoz: a minta pontosan egyelemű listára illeszkedik, a kifejezés kételemű lista.
 
 ### 41. Mi lesz az alábbi kifejezés értéke?
 
@@ -525,7 +528,8 @@ c) `8` \
 ***d) Fordítási idejű hibát kapunk***
 
 *Magyarázat:* \
-TODO...
+A `head` egyetlen listát vár paraméterként, de a `map`-et kapja. \
+A többi paraméter figyelmen kívül hagyható, mert már a `head map` rész nem típushelyes.
 
 ### 42. Mi lehet a `Just (Nothing, Nothing)` kifejezés típusa az alábbiak közül?
 
@@ -535,7 +539,8 @@ c) `Maybe (a -> b)` \
 ***d) `Maybe (Maybe a, Maybe b)`***
 
 *Magyarázat:* \
-TODO...
+Az első `Nothing` típusa `Maybe a`, a második `Nothing` típusa `Maybe b`, hiszen nem feltétlenül ugyanolyan típusúak, a rendezett párok heterogenitásából adódóan. \
+Így a `(Nothing, Nothing)` rendezett pár típusa `(Maybe a, Maybe b)`, és így a `Just (Nothing, Nothing)` típusa `Maybe (Maybe a, Maybe b)`.
 
 ### 43. Mi a `(1,2) < (1,2,4)`?
 
@@ -545,7 +550,7 @@ c) `False` \
 d) Futási idejű hiba.
 
 *Magyarázat:* \
-TODO...
+A `(<) :: Ord a => a -> a -> Bool` függvény két ugyanolyan típusú paramétert vár, de az `(1, 2)` egy rendezett pár, míg az `(1, 2, 4)` egy rendezett hármas, így már csak az adatszerkezetet tekintve eltérő típusúak.
 
 ### 44. Adott `data T a = P [(a,a)] | L [a]` mellett mi az `L [('a', 'b')]` kifejezés típusa?
 
@@ -555,7 +560,11 @@ c) `T [(Char, Char)]` \
 d) `T [Char]`
 
 *Magyarázat:* \
-TODO...
+Belülről kifelé haladva:
+- az `'a'` és `'b'` típusa `Char`;
+- az `('a', 'b')` típusa `(Char, Char)`;
+- az `[('a', 'b')]` típusa `[(Char, Char)]`;
+- az `L [('a', 'b')]` típusa `T (Char, Char)`, hiszen az `L` konstruktor egy `[a]` típusú paramétert vár és `[(Char, Char)]` típusú paramétert kap, így lesz az `a` `(Char, Char)`.
 
 ### 45. Melyik kifejezés azonos a `foldr f e [1..4]` kifejezéssel?
 
@@ -565,7 +574,7 @@ c) ``e `f` (1 `f` (2 `f` (3 `f` 4)))`` \
 d) ``(((1 `f` 2) `f` 3) `f` 4) `f` e``
 
 *Magyarázat:* \
-TODO...
+A `foldr` a jobboldali hajtogatást jelenti, azaz a zárójelezés jobb oldalon kezdődik, ahol egyből fel is van használva az `e` kezdőérték a jobb oldalról, majd halad balra visszafele a listán.
 
 ### 46. Melyik állítás igaz az algebrai adattípusokra?
 
@@ -575,7 +584,9 @@ c) Nem lehet típus paraméterük. \
 ***d) Az adatkonstruktorok nevének nagybetűvel kell kezdődniük.***
 
 *Magyarázat:* \
-TODO...
+Az *a)* opcióhoz: ellenpélda: `data Tipus = KonstruktorA | KonstruktorB`.
+A *b)* opcióhoz: ellenpélda: `data ListInt = Cons Int ListInt | Nil`.
+A *c)* opcióhoz: ellenpélda: `data Tuple a b = Tuple a b`.
 
 ### 47. Adott az alábbi `f` függvény, hány olyan `x` egész van amelyre `length (f x) == 3`?
 
@@ -592,7 +603,10 @@ c) 2 \
 d) Végtelen sok.
 
 *Magyarázat:* \
-TODO...
+Vizsgáljuk a két ágat:
+- ha `x` páros, akkor `x` darab 3-ast állítunk elő, így az előállított lista nem lehet 3 hosszú, mert csak `x` hosszú lehet, ahol `x` páros;
+- ha `x` páratlan, akkor `x` darab `x`-et állítunk elő, ami csak akkor lesz 3 hosszú, ha `x == 3`, ami meg is felel a feltevésünknek.
+Így az `x = 3` az egyetlen megoldás.
 
 ### 48. Mi az `(\x -> zip x (tail x)) [1]` kifejezése értéke?
 
@@ -602,6 +616,10 @@ b) Futási idejű hiba. \
 d) `[(1,1),(1,1)]`
 
 *Magyarázat:* \
-TODO...
+Kiértékeljük:
+1. `(\x -> zip x (tail x)) [1]`;
+2. `zip [1] (tail [1])`;
+3. `zip [1] []`;
+4. `[]`.
 
 #### *Forrás: [Funkcprog beugró (Quizlet)](https://quizlet.com/hu/874315627/funkcprog-beugro-flash-cards/)*
